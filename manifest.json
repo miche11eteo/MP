@@ -1,0 +1,16 @@
+{
+    "lang": "en-gb",
+    "name": "Mechanical Power",
+    "short_name": "Mechanical Power",
+    "description": "Description for app here",
+    "start_url": "/",
+    "background_color": "#ffffff",
+    "theme_color": "#edffab",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/icon.png"
+        }
+    ]
+}

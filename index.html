@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+    <link rel="stylesheet" href="default.css"> 
+	<link rel="stylesheet" href="fonts.css">
+    <head>
+        <meta charset="UTF-8" />
+        <base target="_blank">
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="shortcut icon" href="./icon.png" type="image/png" />
+        
+		<title>Mechanical Power</title>
+
+        <script type="importmap">
+            {
+                "imports": {
+                    "rhu": "./js3party/rhu/rhu.js",
+                    "rhu/": "./js3party/rhu/"
+                }
+            }
+        </script>
+        <script>
+            if ("serviceWorker" in navigator) {
+				navigator.serviceWorker.register('/sw.js', { scope: '/' });
+            }
+        </script>
+        <script type="module" src="./app.js"></script>
+    </head>
+    <body>
+    </body>
+</html>
