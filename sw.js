@@ -5,23 +5,23 @@ self.addEventListener("install", event => {
         // Cache all resources required for the PWA
         const cache = await caches.open(CACHE_NAME);
         cache.addAll([
-            "/",
+            `/MP/`,
 
-            "/fonts/roboto/Roboto-Regular.ttf",
-            "/fonts/geist/Geist-Regular.woff",
-            "/fonts/geist/Geist-Bold.woff",
-            "/fonts/sharetechmono/default.woff2",
+            `/MP/fonts/roboto/Roboto-Regular.ttf`,
+            `/MP/fonts/geist/Geist-Regular.woff`,
+            `/MP/fonts/geist/Geist-Bold.woff`,
+            `/MP/fonts/sharetechmono/default.woff2`,
 
-            "/default.css",
-            "/fonts.css",
+            `/MP/default.css`,
+            `/MP/fonts.css`,
             
-            "/js3party/rhu/html.js",
-            "/js3party/rhu/signal.js",
-            "/js3party/rhu/style.js",
-            "/js3party/rhu/weak.js",
-            "/js3party/rhu/rest.js",
-            "/js3party/rhu/theme.js",
-            "/app.js",
+            `/MP/js3party/rhu/html.js`,
+            `/MP/js3party/rhu/signal.js`,
+            `/MP/js3party/rhu/style.js`,
+            `/MP/js3party/rhu/weak.js`,
+            `/MP/js3party/rhu/rest.js`,
+            `/MP/js3party/rhu/theme.js`,
+            `/MP/app.js`,
         ]);
     })());
 });
