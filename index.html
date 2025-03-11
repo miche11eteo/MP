@@ -6,8 +6,8 @@
         <meta charset="UTF-8" />
         <base target="_blank">
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-	<link rel="manifest" href="manifest.json" />
-        <link rel="shortcut icon" href="./icon.png" type="image/png" />
+		<link rel="manifest" href="/MP/manifest.json" />
+        <link rel="shortcut icon" href="/MP/icon.png" type="image/png" />
         
 		<title>Mechanical Power</title>
 
@@ -21,7 +21,7 @@
         </script>
         <script>
             if ("serviceWorker" in navigator) {
-				navigator.serviceWorker.register('sw.js', {scope: location.pathname});
+				navigator.serviceWorker.register('/MP/sw.js', { scope: "/MP/" });
             }
         </script>
         <script type="module" src="./app.js"></script>
