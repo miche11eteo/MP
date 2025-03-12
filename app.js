@@ -187,7 +187,7 @@ const App = () => {
 	let bmiIndex = 0;
     if ($["BMI"] >= 12 && $["BMI"] < 30) {
         bmiIndex = 1;
-    } else if ($["BMI"] >= 30 && $["BMI"] < 40) {
+    } else if ($["BMI"] >= 30 && $["BMI"] <= 40) {
         bmiIndex = 0.9;
     } else if ($["BMI"] > 40) {
         bmiIndex = 0.8;
