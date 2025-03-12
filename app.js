@@ -72,6 +72,10 @@ const style = Style(({ css }) => {
     background-color: #e30538;
     color: #fff;
     `;
+	const low = css.class`
+    background-color: #fff;
+    color: #000;
+    `;
 
     return {
         title,
@@ -93,20 +97,27 @@ const App = () => {
     const result = signal(0);
 	const description = signal("");
 
-    const variables = ["Respiratory rate", "Tidal volume", "PEEP", "Driving pressure", "Flow rate", "BMI"];
+    const variables = ["Respiratory rate", "Tidal volume", "Peak pressure", "Plateau pressure", "PEEP", "BMI"];
 	const units = {
 		"Respiratory rate": "breaths/minute",
-		"Tidal volume": "L",
+		"Tidal volume": "ml",
+		"Peak pressure": "cmH2O",
+		"Plateau pressure": "cmH2O",
 		"PEEP": "cmH2O",
-		"Driving pressure": "cmH2O",
-		"Flow rate": "L/min",
 		"BMI": "kg/m^2"
 	};
 
     const dom = html`
     <div class="${style.wrapper}">
         <h1 class="${style.title}">Mechanical Power</h1>
-		<div style="padding: 0 5px;"> description here </div>
+		<div style="padding: 0 5px; white-space: pre-line;">
+			Equation used:  
+			"Respiratory rate" * ("Tidal volume"/1000) * ("Peak pressure" - (("Plateau pressure" - "PEEP") / 2)) * 0.098 * bmiIndex.  
+
+			If BMI 12-30, bmiIndex = 1.  
+			If BMI 30-40, bmiIndex = 0.9.  
+			If BMI >40, bmiIndex = 0.8.
+			
         <div m-id="body" class="${style.body}">
             <table m-id="table" class="${style.list}">
             </table>
@@ -145,15 +156,18 @@ const App = () => {
         dom.resultbox.classList.remove(`${style.bad}`);
         dom.resultbox.classList.remove(`${style.warn}`);
         
-        if (v < 20) {
+        if (v >= 4 && v <= 12) {
             dom.resultbox.classList.add(`${style.good}`);
 			description("description 1 here");
-        } else if (v < 30) {
+        } else if (v >= 12 && v <= 14) {
             dom.resultbox.classList.add(`${style.warn}`);
 			description("description 2 here");
-        } else {
+		} else if (v >14) {
             dom.resultbox.classList.add(`${style.bad}`);
 			description("description 3 here");
+        } else {
+            dom.resultbox.classList.add(`${style.low}`);
+			description("description 4 here");
         }
     })
 
@@ -161,7 +175,7 @@ const App = () => {
     const update = () => {
         for (let v of variables) {
             try {
-                $[v] = parseInt(dom[v].value);
+                 $[v] = parseFloat(dom[v].value);
             } catch {
                 $[v] = 0;
             }
@@ -170,10 +184,29 @@ const App = () => {
                 $[v] = 0;
             }
         }
-        result($["Respiratory rate"] + $["Tidal volume"] + $["PEEP"] + $["Driving pressure"] + $["Flow rate"] + $["BMI"]);
-    };
-/*"Respiratory rate", "Tidal volume", "PEEP", "Driving pressure", "Flow rate", "BMI"*/
-    
+	let bmiIndex = 0;
+    if ($["BMI"] >= 12 && $["BMI"] < 30) {
+        bmiIndex = 1;
+    } else if ($["BMI"] >= 30 && $["BMI"] < 40) {
+        bmiIndex = 0.9;
+    } else if ($["BMI"] > 40) {
+        bmiIndex = 0.8;
+    }
+	
+	 let resultValue = 
+        $["Respiratory rate"] * 
+        ($["Tidal volume"] / 1000) * 
+        ($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 
+        0.098 * 
+        bmiIndex;
+
+    result(parseFloat(resultValue.toFixed(1)));
+	//result($["Respiratory rate"] * ($["Tidal volume"]/1000) * ($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 0.098 * bmiIndex);
+};
+
+//result($["Respiratory rate"] + $["Tidal volume"] + $["PEEP"] + $["Driving pressure"] + $["Flow rate"] + $["BMI"]);
+//"Respiratory rate", "Tidal volume", "Peak pressure", "Plateau pressure", "PEEP", "Flow rate", "BMI"
+
     for (let v of variables) {
         dom[v].addEventListener("keyup", update);
         dom[v].addEventListener("change", update);
