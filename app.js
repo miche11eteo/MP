@@ -114,9 +114,9 @@ const App = () => {
 			Equation used:  
 			"Respiratory rate" * ("Tidal volume"/1000) * ("Peak pressure" - (("Plateau pressure" - "PEEP") / 2)) * 0.098 * bmiIndex.  
 
-			If BMI 12-30, bmiIndex = 1.  
-			If BMI 30-40, bmiIndex = 0.9.  
-			If BMI >40, bmiIndex = 0.8.
+			If BMI 12-30, bmiIndex = 1  
+			If BMI 30-40, bmiIndex = 0.9  
+			If BMI >40, bmiIndex = 0.8
 			
         <div m-id="body" class="${style.body}">
             <table m-id="table" class="${style.list}">
