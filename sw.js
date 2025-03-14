@@ -1,9 +1,9 @@
-const CACHE_NAME = `Mechanical Power v1`;
+const version = 'Mechanical Power v2';
 
 self.addEventListener("install", event => {
     event.waitUntil((async () => {
         // Cache all resources required for the PWA
-        const cache = await caches.open(CACHE_NAME);
+        const cache = await caches.open(version);
         cache.addAll([
             `/MP/`,
 
@@ -26,10 +26,14 @@ self.addEventListener("install", event => {
     })());
 });
 
+  console.log('[sw] Installed successfully :');
+  // self.skipWaiting();
+});
+
 self.addEventListener("fetch", event => {
     event.respondWith((async () => {
         // Load stored resources from cache
-        const cache = await caches.open(CACHE_NAME);
+        const cache = await caches.open(version);
         const cachedResponse = await cache.match(event.request);
         if (cachedResponse) {
             return cachedResponse;
@@ -49,9 +53,13 @@ self.addEventListener("fetch", event => {
     })());
 });
 
-self.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible') {
-        console.log('APP resumed');
-        window.location.reload();
-    }
-});
+self.addEventListener('activate', event => {
+  caches.keys().then(function(cacheNames) {
+    cacheNames.forEach(function(cacheName) {
+      if (cacheName !== version) {
+        caches.delete(cacheName);
+      }
+    });
+  });
+})
+
