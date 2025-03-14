@@ -21,7 +21,9 @@
         </script>
         <script>
             if ("serviceWorker" in navigator) {
-				navigator.serviceWorker.register('/MP/sw.js', { scope: "/MP/" });
+				navigator.serviceWorker.register('/MP/sw.js', { scope: "/MP/" })
+				.then(reg => console.log(reg))
+				.catch(err => console.log(err));
             }
         </script>
         <script type="module" src="./app.js"></script>
