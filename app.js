@@ -112,10 +112,11 @@ const App = () => {
         <h1 class="${style.title}">Mechanical Power</h1>
 		<div style="padding: 0 5px; white-space: pre-line;">
 			Equation used:  
-			"Respiratory rate" * ("Tidal volume"/1000) * ("Peak pressure" - (("Plateau pressure" - "PEEP") / 2)) * 0.098 * bmiIndex.  
+			"Respiratory rate" * ("Tidal volume"/1000) * (("Peak pressure" * bmiIndex) - (("Plateau pressure" - "PEEP") / 2)) * 0.098  
 
-			If BMI 12-30, bmiIndex = 1  
-			If BMI 30-40, bmiIndex = 0.9  
+			If BMI <12, bmiIndex = 1.1
+			If BMI 12-30, bmiIndex = 1 
+			If BMI 30-40, bmiIndex = 0.9
 			If BMI >40, bmiIndex = 0.8
 			
         <div m-id="body" class="${style.body}">
@@ -191,14 +192,15 @@ const App = () => {
         bmiIndex = 0.9;
     } else if ($["BMI"] > 40) {
         bmiIndex = 0.8;
+	} else if ($["BMI"] < 12) {
+        bmiIndex = 1.1;
     }
 	
 	 let resultValue = 
         $["Respiratory rate"] * 
         ($["Tidal volume"] / 1000) * 
-        ($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 
-        0.098 * 
-        bmiIndex;
+        (($["Peak pressure"] * bmiIndex) - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 
+        0.098;
 
     result(parseFloat(resultValue.toFixed(1)));
 	//result($["Respiratory rate"] * ($["Tidal volume"]/1000) * ($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 0.098 * bmiIndex);
