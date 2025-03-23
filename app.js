@@ -261,16 +261,15 @@ const App = () => {
         
         if (v >= 4 && v <= 12) {
             dom.resultbox.classList.add(`${style.good}`);
-			description("description 1 here");
-        } else if (v >= 12 && v <= 14) {
+			description("citation 1 here");
+        } else if (v >= 12 && v <= 17) {
             dom.resultbox.classList.add(`${style.warn}`);
-			description("description 2 here");
-		} else if (v >14) {
+			description("citation 2 here");
+		} else if (v >17) {
             dom.resultbox.classList.add(`${style.bad}`);
-			description("description 3 here");
+			description("citation 3 here");
         } else {
             dom.resultbox.classList.add(`${style.low}`);
-			description("description 4 here");
         }
     })
     
