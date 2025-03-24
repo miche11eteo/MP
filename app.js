@@ -268,7 +268,7 @@ const App = () => {
         dom.resultbox.classList.remove(`${style.bad}`);
         dom.resultbox.classList.remove(`${style.warn}`);
         
-        if (v >= 4 && v <= 12) {
+        if (v >= 3 && v <= 12) {
             dom.resultbox.classList.add(`${style.good}`);
 			description("Guerin et al (2016)");
         } else if (v >= 12 && v < 17) {
