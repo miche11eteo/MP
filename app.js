@@ -270,7 +270,7 @@ const App = () => {
         
         if (v >= 3 && v <= 12) {
             dom.resultbox.classList.add(`${style.good}`);
-			description("Guerin et al (2016)");
+			description("Guerin et al (2016), Romitti et al (2022)");
         } else if (v >= 12 && v < 17) {
             dom.resultbox.classList.add(`${style.warn}`);
 			description("Guerin et al (2016)");
