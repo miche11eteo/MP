@@ -1,4 +1,4 @@
-const version = 'Mechanical Power v4';
+const version = 'Mechanical Power v5';
 
 self.addEventListener("install", event => {
     event.waitUntil((async () => {
