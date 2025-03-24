@@ -36,6 +36,12 @@ const style = Style(({ css }) => {
 	font-size: 18px;
 	`;
 	
+	const equationRef = css.class`
+	padding:8px;
+	font-size: 15px;
+	font-style: italic;
+	`;
+	
 	const bmiDes = css.class`
 	padding: 8px;
 	font-size: 15px;
@@ -95,6 +101,7 @@ const style = Style(({ css }) => {
         result,
 		equation,
 		bmiDes,
+		equationRef,
 
         good,
         warn,
@@ -118,12 +125,14 @@ const App = () => {
 
     const dom = html`
     <div class="${style.wrapper}">
-        <h1 class="${style.title}">Mechanical Power</h1>
+        <h1 class="${style.title}">Mechanical Power Calculator</h1>
 		
-		<div class="${style.equation}">
-			Equation used:  
+		<div class="${style.equation}"> 
 			"Respiratory rate" * ("Tidal volume"/1000) * (("Peak pressure" * bmiIndex) - (("Plateau pressure" - "PEEP") / 2)) * 0.098
+		<div class="${style.equationRef}"> 
+			Adapted from Gattinoni et al (2016)
 		</div>
+	</div>
 
 	<div class="${style.bmiDes}">
 			If BMI <30, bmiIndex = 1 <br> 
@@ -261,15 +270,16 @@ const App = () => {
         
         if (v >= 4 && v <= 12) {
             dom.resultbox.classList.add(`${style.good}`);
-			description("citation 1 here");
-        } else if (v >= 12 && v <= 17) {
+			description("Guerin et al (2016)");
+        } else if (v >= 12 && v < 17) {
             dom.resultbox.classList.add(`${style.warn}`);
-			description("citation 2 here");
-		} else if (v >17) {
+			description("Guerin et al (2016)");
+		} else if (v >=17) {
             dom.resultbox.classList.add(`${style.bad}`);
-			description("citation 3 here");
+			description("Serpa Neto et al (2018), Urner et al (2020)");
         } else {
             dom.resultbox.classList.add(`${style.low}`);
+			description("");
         }
     })
     
