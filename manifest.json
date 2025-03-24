@@ -1,8 +1,8 @@
 {
     "lang": "en-gb",
-    "name": "Mechanical Power",
-    "short_name": "Mechanical Power",
-    "description": "Description for app here",
+    "name": "Mechanical Power Calculator",
+    "short_name": "MP Calculator",
+    "description": "An app to calculate the mechanical power delivered by a ventilator",
     "start_url": "/MP/",
 	"scope": "/MP/",
     "background_color": "#ffffff",
