@@ -106,12 +106,12 @@ const App = () => {
     const result = signal(0);
 	const description = signal("");
 
-    const variables = ["Respiratory rate", "Tidal volume", "Peak pressure", "Plateau pressure", "PEEP"];
+    const variables = ["Respiratory Rate", "Tidal Volume", "Peak Pressure", "Plateau Pressure", "PEEP"];
 	const units = {
-		"Respiratory rate": "breaths/minute",
-		"Tidal volume": "ml",
-		"Peak pressure": "cmH2O",
-		"Plateau pressure": "cmH2O",
+		"Respiratory Rate": "breaths/minute",
+		"Tidal Volume": "ml",
+		"Peak Pressure": "cmH2O",
+		"Plateau Pressure": "cmH2O",
 		"PEEP": "cmH2O",
 	};
 
@@ -120,7 +120,7 @@ const App = () => {
         <h1 class="${style.title}">Mechanical Power Calculator</h1>
 		
 		<div class="${style.equation}"> 
-			RR * TV (in litres) * (Peak pressure - ((Plateau pressure - PEEP) / 2)) * 0.098
+			Respiratory Rate * Tidal Volume (in litres) * (Peak Pressure - ((Plateau Pressure - PEEP) / 2)) * 0.098
 		<div class="${style.equationRef}"> 
 			Adapted from Gattinoni et al (2016). Nb this calculator does not account for BMI
 		</div>
@@ -142,10 +142,10 @@ const App = () => {
     html(dom).box();
 	
 	const variableRanges = {
-    "Respiratory rate": { min: 0, max: 40, step: 1 },
-    "Tidal volume": { min: 0, max: 800, step: 1 },
-    "Peak pressure": { min: 0, max: 40, step: 1 },
-    "Plateau pressure": { min: 0, max: 40, step: 1 },
+    "Respiratory Rate": { min: 0, max: 40, step: 1 },
+    "Tidal Volume": { min: 0, max: 800, step: 1 },
+    "Peak Pressure": { min: 0, max: 40, step: 1 },
+    "Plateau Pressure": { min: 0, max: 40, step: 1 },
     "PEEP": { min: 0, max: 30, step: 1 }
 	};
 
@@ -164,13 +164,13 @@ const App = () => {
         }
 		
 		 let resultValue = 
-			$["Respiratory rate"] * 
-			($["Tidal volume"] / 1000) * 
-			($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 
+			$["Respiratory Rate"] * 
+			($["Tidal Volume"] / 1000) * 
+			($["Peak Pressure"] - (($["Plateau Pressure"] - $["PEEP"]) / 2)) * 
 			0.098;
 
 		result(parseFloat(resultValue.toFixed(1)));
-		//result($["Respiratory rate"] * ($["Tidal volume"]/1000) * ($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 0.098);
+		//result($["Respiratory Rate"] * ($["Tidal Volume"]/1000) * ($["Peak Pressure"] - (($["Plateau Pressure"] - $["PEEP"]) / 2)) * 0.098);
 	};
 
     variables.map((v) => {
