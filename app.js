@@ -94,7 +94,6 @@ const style = Style(({ css }) => {
         input,
         result,
 		equation,
-		bmiDes,
 		equationRef,
 
         good,
@@ -167,11 +166,11 @@ const App = () => {
 		 let resultValue = 
 			$["Respiratory rate"] * 
 			($["Tidal volume"] / 1000) * 
-			(($["Peak pressure"] * bmiIndex) - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 
+			($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 
 			0.098;
 
 		result(parseFloat(resultValue.toFixed(1)));
-		//result($["Respiratory rate"] * ($["Tidal volume"]/1000) * ($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 0.098 * bmiIndex);
+		//result($["Respiratory rate"] * ($["Tidal volume"]/1000) * ($["Peak pressure"] - (($["Plateau pressure"] - $["PEEP"]) / 2)) * 0.098);
 	};
 
     variables.map((v) => {
