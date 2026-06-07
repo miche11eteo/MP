@@ -1,4 +1,4 @@
-const version = 'Mechanical Power v6';
+const version = 'Mechanical Power v7';
 
 self.addEventListener("install", event => {
     event.waitUntil((async () => {
@@ -24,10 +24,6 @@ self.addEventListener("install", event => {
             `/MP/app.js`,
         ]);
     })());
-});
-
-  console.log('[sw] Installed successfully :');
-  // self.skipWaiting();
 });
 
 self.addEventListener("fetch", event => {
