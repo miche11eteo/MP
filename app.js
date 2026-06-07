@@ -42,12 +42,6 @@ const style = Style(({ css }) => {
 	font-style: italic;
 	`;
 	
-	const bmiDes = css.class`
-	padding: 8px;
-	font-size: 15px;
-	font-style: italic;
-	`;
-
     const list = css.class`
 	width: 100%;
 	font-size: 18px;
@@ -113,14 +107,13 @@ const App = () => {
     const result = signal(0);
 	const description = signal("");
 
-    const variables = ["Respiratory rate", "Tidal volume", "Peak pressure", "Plateau pressure", "PEEP", "BMI"];
+    const variables = ["Respiratory rate", "Tidal volume", "Peak pressure", "Plateau pressure", "PEEP"];
 	const units = {
 		"Respiratory rate": "breaths/minute",
 		"Tidal volume": "ml",
 		"Peak pressure": "cmH2O",
 		"Plateau pressure": "cmH2O",
 		"PEEP": "cmH2O",
-		"BMI": "kg/m^2"
 	};
 
     const dom = html`
@@ -128,16 +121,10 @@ const App = () => {
         <h1 class="${style.title}">Mechanical Power Calculator</h1>
 		
 		<div class="${style.equation}"> 
-			"Respiratory rate" * ("Tidal volume"/1000) * (("Peak pressure" * bmiIndex) - (("Plateau pressure" - "PEEP") / 2)) * 0.098
+			RR * TV (in litres) * (Peak pressure - ((Plateau pressure - PEEP) / 2)) * 0.098
 		<div class="${style.equationRef}"> 
-			Adapted from Gattinoni et al (2016)
+			Adapted from Gattinoni et al (2016). Nb this calculator does not account for BMI
 		</div>
-	</div>
-
-	<div class="${style.bmiDes}">
-			If BMI <30, bmiIndex = 1 <br> 
-			If BMI 30-40, bmiIndex = 0.9 <br>
-			If BMI >40, bmiIndex = 0.8
 	</div>
 			
     <div m-id="body" class="${style.body}">
@@ -160,8 +147,7 @@ const App = () => {
     "Tidal volume": { min: 0, max: 800, step: 1 },
     "Peak pressure": { min: 0, max: 40, step: 1 },
     "Plateau pressure": { min: 0, max: 40, step: 1 },
-    "PEEP": { min: 0, max: 30, step: 1 },
-    "BMI": { min: 0, max: 50, step: 0.1 }
+    "PEEP": { min: 0, max: 30, step: 1 }
 	};
 
 	const $ = {};
@@ -177,14 +163,6 @@ const App = () => {
                 $[v] = 0;
             }
         }
-		let bmiIndex = 0;
-		if ($["BMI"] < 30) {
-			bmiIndex = 1;
-		} else if ($["BMI"] >= 30 && $["BMI"] <= 40) {
-			bmiIndex = 0.9;
-		} else if ($["BMI"] > 40) {
-			bmiIndex = 0.8;
-		}
 		
 		 let resultValue = 
 			$["Respiratory rate"] * 
