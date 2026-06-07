@@ -120,7 +120,7 @@ const App = () => {
         <h1 class="${style.title}">Mechanical Power Calculator</h1>
 		
 		<div class="${style.equation}"> 
-			Respiratory Rate * Tidal Volume (in litres) * (Peak Pressure - ((Plateau Pressure - PEEP) / 2)) * 0.098
+			Respiratory Rate * Tidal Volume (in litres) * (Peak Pressure - [{Plateau Pressure - PEEP} / 2]) * 0.098
 		<div class="${style.equationRef}"> 
 			Adapted from Gattinoni et al (2016). Nb this calculator does not account for BMI
 		</div>
